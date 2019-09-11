@@ -53,11 +53,13 @@ setup(
     long_description='pymaft is a library for numerical simulation of fields',
     platforms='tested on LINUX',
     ext_modules=cythonize([ Extension("pymaft/*", ["pymaft/*.pyx"],
-        include_dirs=[numpy.get_include()],
+          include_dirs=[numpy.get_include()],
         extra_compile_args=ompArgs,
-        extra_link_args=ompArgs 
-        )]),
-    libraries=[],
+        extra_link_args=ompArgs,
+        )],
+        compiler_directives={"language_level": sys.version_info[0]},
+        ),
+	libraries=[],
     packages=['pymaft'],
     package_data={'pymaft': ['*.pxd']}
 )
