@@ -6,7 +6,7 @@
 
 ![Self-shearing instability in active scalar field theory](examples/ssi.gif)
 
-The above simulation is done using PyMAFT. It shows that droplet growth is interrupted via a self-shearing instability. Read more: https://arxiv.org/abs/1907.04819
+The above simulation is done using PyMAFT. It shows that the droplet growth is interrupted via a self-shearing instability for contractile stress in active model H. Read more: https://arxiv.org/abs/1907.04819
 
 ## Install
 
