@@ -1,4 +1,4 @@
-![Self-shearing instability in active scalar field theory](examples/ssi.gif)
+![Self-shearing instability in active scalar field theory](ssi.gif)
 
 The above animation shows that the droplet growth is interrupted via a self-shearing instability for contractile stress in active model H. 
 
