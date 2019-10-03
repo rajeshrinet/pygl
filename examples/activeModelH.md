@@ -8,6 +8,6 @@ Poster: [at this URL](https://www.dropbox.com/sh/0zmd2s0y4h2dzjf/AACTLfOQ6OjMHeH
 
 Preprint: https://arxiv.org/abs/1907.04819
 
-Journal:
+Journal: [Phys. Rev. Lett. 123, 148005, 2019](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.123.148005)
 
 Movies: [at this URL](https://www.dropbox.com/sh/5krtwg7gwmq736r/AADZMIimLTgjVdyfb1EYnJZGa?dl=0)
