@@ -47,12 +47,12 @@ def azimuthalAverage(ff):
 
 
 ## readymade bubbles and droplets
-cpdef bubble(u, radi, phiP=1, phiM=-1):
+cpdef bubble(u, radi, locx=0, locy=0, phiP=1, phiM=-1):
     r2 = radi*radi
     Nx, Ny = np.shape(u)
     for i in range(Nx):
         for j in range(Ny):
-            rsq = (i-0.5*Nx)*(i-0.5*Nx)+(j-0.5*Ny)*(j-0.5*Ny)
+            rsq = (i-locx)*(i-locx) + (j-locy)*(j-locy)
             if rsq<r2:
                 u[i,j] = phiM 
             else:
@@ -60,12 +60,12 @@ cpdef bubble(u, radi, phiP=1, phiM=-1):
     return u
 
 
-cpdef droplet(u, radi, phiP=1, phiM=-1):
+cpdef droplet(u, radi, locx=0, locy=0, phiP=1, phiM=-1):
     r2 = radi*radi
     Nx, Ny = np.shape(u)
     for i in range(Nx):
         for j in range(Ny):
-            rsq = (i-0.5*Nx)*(i-0.5*Nx)+(j-0.5*Ny)*(j-0.5*Ny)
+            rsq = (i-locx)*(i-locx) + (j-locy)*(j-locy)
             if rsq<r2:
                 u[i,j] = phiP 
             else:
