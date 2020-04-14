@@ -16,14 +16,13 @@ The above simulation is done using PyMAFT. It shows that the droplet growth is i
 ## Installation
 Clone (or download) the repository and use a terminal to install using
 
-
 ```
 git clone https://github.com/rajeshrinet/pymaft.git
 cd pymaft
 python setup.py install
 ``` 
 
-PyRoss requires the following software 
+PyMAFT requires the following software 
 
 - Python 2.6+ or Python 3.4+
 - [Cython 0.25.x+](http://docs.cython.org/en/latest/index.html) |  [Matplotlib 2.0.x+](https://matplotlib.org) | [NumPy 1.x+](http://www.numpy.org) | [SciPy 1.1.x+](https://www.scipy.org/) 
