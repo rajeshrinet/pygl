@@ -33,12 +33,12 @@ PyMAFT requires the following software
 See the [examples folder](https://github.com/rajeshrinet/pymaft/tree/master/examples) for a list of examples. 
 
 ## Publications
-* [Hydrodynamically interrupted droplet growth in scalar active matter](https://doi.org/10.1103/PhysRevLett.123.148005). Rajesh Singh and Michael E. Cates, Phys. Rev. Lett. 123, 148005 (2019).
+* [Hydrodynamically interrupted droplet growth in scalar active matter](https://doi.org/10.1103/PhysRevLett.123.148005). Rajesh Singh and Michael E. Cates. Phys. Rev. Lett. 123, 148005 (2019).
 
-* [Self-propulsion of active droplets without liquid-crystalline order](https://arxiv.org/abs/2004.06064). Rajesh Singh, Elsen Tjhung, Michael E. Cates, arXiv:2004.06064.  
+* [Self-propulsion of active droplets without liquid-crystalline order](https://arxiv.org/abs/2004.06064). Rajesh Singh, Elsen Tjhung, and Michael E. Cates. arXiv:2004.06064.  
+
 
 ## Support
-
 Please use the [issue tracker](https://github.com/rajeshrinet/pymaft/issues) on GitHub.
 
 ## License
