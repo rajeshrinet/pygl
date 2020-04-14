@@ -1,4 +1,4 @@
-## PyMAFT: Active field theories in Python [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/rajeshrinet/pymaft/master?filepath=binder)
+## PyMAFT: Field theoretic simulations in python [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/rajeshrinet/pymaft/master?filepath=binder)
 [About](#about) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
 
 ## About
