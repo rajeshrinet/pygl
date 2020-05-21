@@ -2,7 +2,6 @@ import  numpy as np
 cimport numpy as np
 cimport cython
 from libc.math cimport sqrt, pow
-#from cython.parallel import prange
 cdef double PI = 3.14159265359
 from scipy.sparse import spdiags
 DTYPE   = np.float
@@ -80,7 +79,6 @@ cdef class FD:
         ww[0,0] = 1.
         for i in range(1, self.s):
             jj = min(i, m)+1;   bb=b0/bt[i]
-            #for k in prange(jj, nogil=True):
             for k in range(jj):
                 ww[k, i] = bb*(k*ww[k-1,i-1]-(stp[i-1])*ww[k,i-1])
             b0 = bt[i]

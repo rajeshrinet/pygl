@@ -1,10 +1,10 @@
 import numpy
-import os, sys, os.path, tempfile, subprocess, shutil
+import os, sys 
 from distutils.core import setup
 from Cython.Build import cythonize
 from distutils.extension import Extension
 import Cython.Compiler.Options
-Cython.Compiler.Options.annotate = True
+Cython.Compiler.Options.annotate=True
 
 
 setup(

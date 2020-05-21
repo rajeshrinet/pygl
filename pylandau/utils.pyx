@@ -2,7 +2,6 @@ import  numpy as np
 cimport numpy as np
 cimport cython
 from libc.math cimport sqrt, pow, log
-from cython.parallel import prange
 cdef double PI = 3.1415926535
 from scipy.sparse import spdiags
 
@@ -120,7 +119,7 @@ cpdef twoBubbles(u, radi1, locx1, locy1, radi2, locx2, locy2, phiP=1, phiM=-1):
 ##        cdef double [:,:] w1 = dw 
 ##        cdef int i, j
 ##
-##        for i in prange(self.Nx, nogil=True):
+##        for i in range(self.Nx):
 ##            for j in range(self.Ny):
 ##                w1[i,j] = fac*gaussianRn()
 ##        return dw
@@ -268,7 +267,7 @@ cdef class CentDiff:
         cdef int [:] idw = self.idwn
         cdef int [:] jdw = self.jdwn 
 
-        for i in prange(self.Nx, nogil=True):
+        for i in range(self.Nx):
             for j in range(self.Ny):
                 du1[i,j] = .1*(u[iup[i],jup[j]]-u[iup[i],jdw[j]]) + .3*(u[i,jup[j]]-u[i,jdw[j]]) +.1*(u[idw[i],jup[j]]-u[idw[i],jdw[j]])
         return du
@@ -285,7 +284,7 @@ cdef class CentDiff:
         cdef int [:] idw = self.idwn
         cdef int [:] jdw = self.jdwn 
 
-        for i in prange(self.Nx, nogil=True):
+        for i in range(self.Nx):
             for j in range(self.Ny):
                 du1[i,j] = .1*(u[iup[i],jup[j]]-u[idw[i],jup[j]]) + .3*(u[iup[i],j]-u[idw[i],j]) +.1*(u[iup[i],jdw[j]]-u[idw[i],jdw[j]])
         return du
@@ -302,7 +301,7 @@ cdef class CentDiff:
         cdef int [:] idw = self.idwn
         cdef int [:] jdw = self.jdwn
 
-        for i in prange(self.Nx, nogil=True):
+        for i in range(self.Nx):
             for j in range(self.Ny):
                 du1[i,j] = -0.5*u[idw[i],jup[j]]+2.0*u[i,jup[j]]-0.5*u[iup[i],jup[j]] + 2.0*u[idw[i],j]-6.0*u[i,j]+2.0*u[iup[i],j] - 0.5*u[idw[i],jdw[j]]+2.0*u[i,jdw[j]]-0.5*u[iup[i],jdw[j]]
         return du
@@ -321,7 +320,7 @@ cdef class CentDiff:
 
         cdef double fp = 4.0/105, tt = 1.0/280.0
 
-        for i in prange(self.Nx, nogil=True):
+        for i in range(self.Nx):
             for j in range(self.Ny):
                 jup  = jupa[j]
                 jup2 = jupa[jupa[j]]
@@ -347,7 +346,7 @@ cdef class CentDiff:
 
         cdef double t1 = 1.0/3, t2 = 1.0/12
 
-        for i in prange(self.Nx, nogil=True):
+        for i in range(self.Nx):
             for j in range(self.Ny):
                 du1[i,j] = t1*(u[i,j+1]-u[i,j-1]) + t2*(u[i+1,j+1]+u[i+1,j-1]) - t2*(u[i-1,j+1]+u[i-1,j-1])
         return du 
@@ -362,7 +361,7 @@ cdef class CentDiff:
 
         cdef double t1 = 1.0/3, t2 = 1.0/12
 
-        for i in prange(self.Nx, nogil=True):
+        for i in range(self.Nx):
             for j in range(self.Ny):
                 du1[i,j] = t1*(u[i+1,j]-u[i-1,j]) + t2*(u[i+1,j-1]+u[i+1,j+1]) - t2*(u[i-1,j-1]+u[i-1,j+1])
         return du 
@@ -377,7 +376,7 @@ cdef class CentDiff:
 
         cdef double t1 = 1.0/6, t2 = 4.0/6, t3=20/6.0
 
-        for i in prange(self.Nx, nogil=True):
+        for i in range(self.Nx):
             for j in range(self.Ny):
                 du1[i,j] = t1*(u[i-1,j-1]+u[i-1,j+1]+u[i+1,j+1]+u[i+1,j-1]) + t2*( u[i,j+1]+u[i,j-1]+u[i-1,j]+u[i+1,j] ) - t3*u[i,j]
         return du 
@@ -396,7 +395,7 @@ cdef class CentDiff:
 
         cdef double fp = 4.0/105, tt = 1.0/280.0
 
-        for i in prange(self.Nx, nogil=True):
+        for i in range(self.Nx):
             iup  = iupa[i]
             iup2 = iupa[iupa[i]]
             iup3 = iupa[iupa[iupa[i]]]
