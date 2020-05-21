@@ -39,7 +39,7 @@ See the [examples folder](https://github.com/rajeshrinet/pylandau/tree/master/ex
 
 
 ## Support
-Please use the [issue tracker](https://github.com/rajeshrinet/landau/issues) on GitHub.
+Please use the [issue tracker](https://github.com/rajeshrinet/pylandau/issues) on GitHub.
 
 ## License
 We believe that openness and sharing improves the practice of science and increases the reach of its benefits. This code is released under the [MIT license](http://opensource.org/licenses/MIT). Our choice is guided by the excellent article on [Licensing for the scientist-programmer](http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1002598). 
