@@ -8,21 +8,19 @@ Cython.Compiler.Options.annotate = True
 
 
 setup(
-    name='pylandau',
+    name='PyLandau',
     version='1.0.0',
-    url='https://gitlab.com/rajeshrinet/',
-    author='Rajesh Singh',
-    author_email='rajeshrinet@gmail.com',
+    url='https://github.com/rajeshrinet/pylandau',
+    author='The PyLandau team',
     license='MIT',
-    description='python library for numerical simulation of fields',
-    long_description='pylandau is a library for numerical simulation of fields',
-    platforms='tested on LINUX',
+    description='python library for numerical simulation of field theories',
+    platforms='works on all platforms (such as LINUX, macOS, and Microsoft Windows)',
     ext_modules=cythonize([ Extension("pylandau/*", ["pylandau/*.pyx"],
         include_dirs=[numpy.get_include()],
-        )]),
+        )],
+        compiler_directives={"language_level": sys.version_info[0]},
+        ),
     libraries=[],
     packages=['pylandau'],
-    package_data={'pylandau': ['*.pxd']}
+    package_data={'pylandau': ['*.pxd']},
 )
-
-

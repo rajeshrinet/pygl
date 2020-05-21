@@ -2,7 +2,7 @@ import  numpy as np
 cimport numpy as np
 cimport cython
 from libc.math cimport sqrt, pow
-from cython.parallel import prange
+#from cython.parallel import prange
 cdef double PI = 3.14159265359
 from scipy.sparse import spdiags
 DTYPE   = np.float
@@ -80,15 +80,16 @@ cdef class FD:
         ww[0,0] = 1.
         for i in range(1, self.s):
             jj = min(i, m)+1;   bb=b0/bt[i]
-            for k in prange(jj, nogil=True):
+            #for k in prange(jj, nogil=True):
+            for k in range(jj):
                 ww[k, i] = bb*(k*ww[k-1,i-1]-(stp[i-1])*ww[k,i-1])
             b0 = bt[i]
 
-            for j in prange(i, nogil=True):
+            for j in range(i):
                 for k in range(min(i,m),-1,-1):
                     ww[k,j] = ((stp[i])*ww[k,j]-k*ww[k-1,j])/(stp[i]-stp[j])
         
-        for i in prange(self.s, nogil=True):
+        for i in range(self.s):
             for j in range(self.N):
                 d1[i,j] = d0[i,j] * ww[m, i] * ihm
         self.weights = wts[m, :] 
