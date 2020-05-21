@@ -2,7 +2,7 @@
 [About](#about) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
 
 ## About
-[PyLandau](https://github.com/rajeshrinet/pylandau) is a numerical library for simulations of **M**odels of **A**ctive **F**ield **T**heories in Python.
+[PyLandau](https://github.com/rajeshrinet/pylandau) is a numerical library for simulations of Landau-Ginzburg theory in Python.
 
 
 ![Self-shearing instability in active scalar field theory](examples/ssi.gif)
