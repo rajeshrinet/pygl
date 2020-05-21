@@ -1,3 +1,3 @@
-import pymaft.dms
-import pymaft.solvers
-import pymaft.utils
+import pylandau.dms
+import pylandau.solvers
+import pylandau.utils
