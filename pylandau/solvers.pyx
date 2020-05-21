@@ -2,7 +2,7 @@ import  numpy as np
 cimport numpy as np
 cimport cython
 from libc.math cimport sqrt
-from cython.parallel import prange
+#from cython.parallel import prange
 cdef double PI = 3.14159265359
 
 
@@ -86,7 +86,8 @@ cdef class Stokes:
         facy = self.facy
         ieta = 1.0/self.eta
         
-        for jy in prange(Ny, nogil=True): 
+        #for jy in prange(Ny, nogil=True): 
+        for jy in range(Ny): 
             ky = jy*facy if jy<=Ny/2 else (-Ny+jy)*facy
             for jx in range(Nx): 
                 kx = jx*facx if jx<=Nx/2 else (-Nx+jx)*facx
@@ -132,7 +133,8 @@ cdef class Stokes:
         facz = self.facz
         ieta = 1.0/self.eta
         
-        for jz in prange(Nz, nogil=True): 
+        #for jz in prange(Nz, nogil=True): 
+        for jz in range(Nz): 
             for jy in range(0, Ny): 
                 for jx in range(0, Nx): 
                     kx = jx*facx if jx <= Nx / 2 else (-Nx+jx)*facx

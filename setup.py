@@ -6,60 +6,23 @@ from distutils.extension import Extension
 import Cython.Compiler.Options
 Cython.Compiler.Options.annotate = True
 
-def checkOpenmpSupport():
-    """ Adapted from https://stackoverflow.com/questions/16549893/programatically-testing-for-openmp-support-from-a-python-setup-script
-    """ 
-    ompTest = \
-    r"""
-    #include <omp.h>
-    #include <stdio.h>
-    int main() {
-    #pragma omp parallel
-    printf("Thread %d, Total number of threads %d\n", omp_get_thread_num(), omp_get_num_threads());
-    }
-    """
-    tmpdir = tempfile.mkdtemp()
-    curdir = os.getcwd()
-    os.chdir(tmpdir)
-
-    filename = r'test.c'
-    with open(filename, 'w') as file:
-        file.write(ompTest)
-    with open(os.devnull, 'w') as fnull:
-        result = subprocess.call(['cc', '-fopenmp', filename],
-                                 stdout=fnull, stderr=fnull)
-
-    os.chdir(curdir)
-    shutil.rmtree(tmpdir) 
-    if result == 0:
-        return True
-    else:
-        return False
-
-if checkOpenmpSupport() == True:
-    ompArgs = ['-fopenmp']
-else:
-    ompArgs = None 
-
 
 setup(
-    name='pymaft',
+    name='pylandau',
     version='1.0.0',
     url='https://gitlab.com/rajeshrinet/',
     author='Rajesh Singh',
     author_email='rajeshrinet@gmail.com',
     license='MIT',
     description='python library for numerical simulation of fields',
-    long_description='pymaft is a library for numerical simulation of fields',
+    long_description='pylandau is a library for numerical simulation of fields',
     platforms='tested on LINUX',
-    ext_modules=cythonize([ Extension("pymaft/*", ["pymaft/*.pyx"],
+    ext_modules=cythonize([ Extension("pylandau/*", ["pylandau/*.pyx"],
         include_dirs=[numpy.get_include()],
-        extra_compile_args=ompArgs,
-        extra_link_args=ompArgs 
         )]),
     libraries=[],
-    packages=['pymaft'],
-    package_data={'pymaft': ['*.pxd']}
+    packages=['pylandau'],
+    package_data={'pylandau': ['*.pxd']}
 )
 
 
