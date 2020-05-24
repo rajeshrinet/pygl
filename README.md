@@ -1,4 +1,4 @@
-## PyLandau: Field theoretic simulations in python [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/rajeshrinet/pylandau/master?filepath=binder)
+## PyLandau: Field theoretic simulations in python [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/rajeshrinet/pylandau/master?filepath=examples)
 [About](#about) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
 
 ## About
