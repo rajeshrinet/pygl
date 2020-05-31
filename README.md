@@ -2,8 +2,7 @@
 [About](#about) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
 
 ## About
-[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. GL corresponds to the [Ginzburg–Landau](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory) theory.
-
+[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. GL corresponds to the [Ginzburg–Landau](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory).
 
 
 ![Self-shearing instability in active scalar field theory](examples/ssi.gif)
@@ -22,6 +21,11 @@ git clone https://github.com/rajeshrinet/pygl.git
 cd pygl
 python setup.py install
 ``` 
+
+#### Pip
+```
+pip install PyGL
+```
 
 PyGL requires the following software 
 
