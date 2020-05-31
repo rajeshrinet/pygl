@@ -1,10 +1,9 @@
 import numpy
 import os, sys 
-from distutils.core import setup
 from Cython.Build import cythonize
-from distutils.extension import Extension
 import Cython.Compiler.Options
 Cython.Compiler.Options.annotate=True
+from setuptools import setup, Extension
 
 
 setup(
