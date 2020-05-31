@@ -8,7 +8,7 @@ from setuptools import setup, Extension
 
 setup(
     name='pygl',
-    version='1.1.1',
+    version='2.1.1',
     url='https://github.com/rajeshrinet/pygl',
     author='The PyGL team',
     license='MIT',
