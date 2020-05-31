@@ -1,3 +1,3 @@
-import pylandau.dms
-import pylandau.solvers
-import pylandau.utils
+import pygl.dms
+import pygl.solvers
+import pygl.utils
