@@ -1,4 +1,4 @@
-name: PyStokes
+name: pymaft
 channels:
   - conda-forge
 dependencies:
