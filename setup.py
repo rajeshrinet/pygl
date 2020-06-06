@@ -23,5 +23,9 @@ setup(
         ),
     libraries=[],
     packages=['pymaft'],
+    install_requires=['cython','numpy','scipy'],
+    extras_require={
+            'plotting': ['matplotlib'],
+            'notebook': ['jupyter', 'nbconvert']},
     package_data={'pymaft': ['*.pxd']},
 )

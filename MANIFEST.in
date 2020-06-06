@@ -1,2 +1,2 @@
-include pygl/*pyx
-include pygl/*pxd
+include pymaft/*pyx
+include pymaft/*pxd
