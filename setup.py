@@ -7,21 +7,21 @@ from setuptools import setup, Extension
 
 
 setup(
-    name='pygl',
-    version='2.2.2',
-    url='https://github.com/rajeshrinet/pygl',
-    author='The PyGL team',
+    name='pymaft',
+    version='1.0.0',
+    url='https://github.com/rajeshrinet/pymaft',
+    author='The PyMAFT team',
     license='MIT',
     description='python library for numerical simulation of field theories',
     long_description='PyGL is a library for numerical simulation of field theories\
     in non-equilibrium statistical mechanics',
     platforms='works on all platforms (such as LINUX, macOS, and Microsoft Windows)',
-    ext_modules=cythonize([ Extension("pygl/*", ["pygl/*.pyx"],
+    ext_modules=cythonize([ Extension("pymaft/*", ["pymaft/*.pyx"],
         include_dirs=[numpy.get_include()],
         )],
         compiler_directives={"language_level": sys.version_info[0]},
         ),
     libraries=[],
-    packages=['pygl'],
-    package_data={'pygl': ['*.pxd']},
+    packages=['pymaft'],
+    package_data={'pymaft': ['*.pxd']},
 )
