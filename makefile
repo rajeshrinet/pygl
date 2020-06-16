@@ -23,9 +23,9 @@ env:
 
 test:
 	@echo testing pymaft...
-	cd pymaft && python installTests.py
+	cd pymaft/tests/ && python installTests.py
 
 nbtest:
 	@echo testing example notebooks...
 	@echo test $(path)
-	cd examples && python testNotebooks.py --path $(path) --recursive $(recursive)
+	cd pymaft/tests/ && python testNotebooks.py --path $(path) --recursive $(recursive)

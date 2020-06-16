@@ -1,4 +1,4 @@
-## PyMAFT: Field theoretic simulations in python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pymaft/master?filepath=examples) 
+## PyMAFT: Models of Active Field Theories in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pymaft/master?filepath=examples) 
 ![Installation](https://github.com/rajeshrinet/pymaft/workflows/Installation/badge.svg)
 ![Notebooks](https://github.com/rajeshrinet/pymaft/workflows/Notebooks/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/pymaft/badge/?version=latest)](https://pystokes.readthedocs.io/en/latest/?badge=latest)
@@ -7,9 +7,10 @@
 ![License](https://img.shields.io/github/license/rajeshrinet/pymaft) 
 
 [About](#about) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
+![Imagel](examples/banner.jpg)
 
 ## About
-[PyMAFT](https://github.com/rajeshrinet/pymaft) is a numerical library for simulations of **M**odels of **A**ctive **F**ield **T**heories in Python.
+[PyMAFT](https://github.com/rajeshrinet/pymaft) is a numerical library for simulations of **M**odels of **A**ctive **F**ield **T**heories in Python. It constructs differentiation matrices using finite-difference and spectral methods. It also allows to solve Stokes equation using a spectral method, which satisfies compressibility exactly. The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation (implementation for non-zero Reynolds number is planned) in both two and three space dimensions.
 
 
 ![Self-shearing instability in active scalar field theory](examples/ssi.gif)
