@@ -1,9 +1,9 @@
 ## PyMAFT: Models of Active Field Theories in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pymaft/master?filepath=examples) 
 ![Installation](https://github.com/rajeshrinet/pymaft/workflows/Installation/badge.svg)
 ![Notebooks](https://github.com/rajeshrinet/pymaft/workflows/Notebooks/badge.svg)
-[![Documentation Status](https://readthedocs.org/projects/pymaft/badge/?version=latest)](https://pystokes.readthedocs.io/en/latest/?badge=latest)
-[![PyPI version](https://badge.fury.io/py/pystokes.svg)](https://badge.fury.io/py/pymaft)
-[![Downloads](https://pepy.tech/badge/pystokes)](https://pepy.tech/project/pymaft)
+[![Documentation Status](https://readthedocs.org/projects/pymaft/badge/?version=latest)](https://pymaft.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/pymaft.svg)](https://badge.fury.io/py/pymaft)
+[![Downloads](https://pepy.tech/badge/pymaft)](https://pepy.tech/project/pymaft)
 ![License](https://img.shields.io/github/license/rajeshrinet/pymaft) 
 
 [About](#about) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
