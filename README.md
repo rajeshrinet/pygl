@@ -7,6 +7,7 @@
 ![License](https://img.shields.io/github/license/rajeshrinet/pymaft) 
 
 [About](#about) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
+
 ![Self-shearing instability in active scalar field theory](examples/ssi.gif)
 
 ## About
