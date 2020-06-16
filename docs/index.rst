@@ -1,6 +1,6 @@
 PyMAFT API
 ==================================
-.. image:: ../../examples/banner.jpg
+.. image:: ../examples/ssi.gif 
   :width: 700
   :alt: PyMAF banner
 
