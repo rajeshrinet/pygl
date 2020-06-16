@@ -11,6 +11,28 @@ ctypedef np.float_t DTYPE_t
 @cython.boundscheck(False)
 @cython.cdivision(True)
 cdef class Stokes:
+    """
+    Solving Stokes equation on a structured grid. 
+
+    ...
+
+    Parameters
+    ----------
+    eta: float 
+        Viscosity of the fluid (eta)
+    grid: dict 
+        Grid and its properties as a dict
+
+    Example
+    ----------
+    >>> import pymaft 
+    >>> eta    = .1
+    >>> grid   = {"dim":2, "Nx":32, "Ny":32}
+    >>> stokes = pymaft.solvers.Stokes(eta, grid)
+
+   """
+
+    
     cdef:
         readonly int Np, Nx, Ny, Nz, dim, NN
         readonly double facx, facy, facz , eta
@@ -55,6 +77,29 @@ cdef class Stokes:
        
          
     cpdef solve(self, fk):
+        """
+        Compute flow given force per unit area 
+
+        self.vx, self.vy and self.vz contains the flow computed
+
+        ...
+
+        Parameters
+        ----------
+        fk: np.array 
+            Fourier transform of the force per unit area on the grid
+
+        Example
+        ----------
+        >>> import pymaft 
+        >>> eta    = .1
+        >>> grid   = {"dim":2, "Nx":32, "Ny":32}
+        >>> stokes = pymaft.solvers.Stokes(eta, grid)
+        >>> fkx    = np.random.random((32, 32))
+        >>> fky    = np.random.random((32, 32))
+        >>> stokes.solve( (fkx, fky) )
+       """
+
         cdef int dim = self.dim
         if dim == 2:
             self._solve2d(fk)

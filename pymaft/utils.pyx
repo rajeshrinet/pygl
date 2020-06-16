@@ -204,9 +204,9 @@ cpdef avgFunc(u, bins, dim):
 @cython.wraparound(False)
 @cython.boundscheck(False)
 @cython.cdivision(True)
-cdef class CentDiff:
+cdef class FiniteDifference:
     ''' 
-    Finite Difference (central) using loops 
+    Finite Difference using loops 
     '''
     cdef:
         readonly int Np, Nx, Ny, Nz, dim, NN

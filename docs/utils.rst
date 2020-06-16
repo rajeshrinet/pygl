@@ -17,5 +17,5 @@ Utils: Miscellaneous function
 Differentiation using loops without matrices
 ------------------------------------------------------
 finite difference using explicit loops - differs from the implmentation in dms.pyx 
-.. autoclass:: pystokes.unbounded.Rbm
+.. autoclass:: pymaft.utils.FiniteDifference
     :members:

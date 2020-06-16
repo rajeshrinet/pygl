@@ -8,13 +8,16 @@ from setuptools import setup, Extension
 
 setup(
     name='pymaft',
-    version='1.0.0',
+    version='1.0.1',
     url='https://github.com/rajeshrinet/pymaft',
     author='The PyMAFT team',
     license='MIT',
-    description='python library for numerical simulation of field theories',
-    long_description='PyGL is a library for numerical simulation of field theories\
-    in non-equilibrium statistical mechanics',
+    description='PyMAFT is a numerical library for simulations of Models of Active Field Theories in Python.',
+    long_description='PyMAFT is a numerical library for simulations of Models of Active Field Theories in Python.\
+                      It constructs differentiation matrices using finite-difference and spectral methods. \
+                      It also allows to solve Stokes equation using a spectral method, which satisfies compressibility exactly. \
+                       The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation \
+                       in both two and three space ',
     platforms='works on all platforms (such as LINUX, macOS, and Microsoft Windows)',
     ext_modules=cythonize([ Extension("pymaft/*", ["pymaft/*.pyx"],
         include_dirs=[numpy.get_include()],
