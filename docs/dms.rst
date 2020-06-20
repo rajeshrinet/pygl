@@ -5,12 +5,12 @@ Differentiation matrices using finite differentiation and spectral methods
 
 Finite Differentiation Matrices
 ------------------------------------------------------
-.. autoclass:: pymaft.dms.FD
+.. autoclass:: pygl.dms.FD
     :members:
 
 
 Fourier Spectral Matrices
 --------------------------
-.. autoclass:: pymaft.dms.FourierSpectral
+.. autoclass:: pygl.dms.FourierSpectral
     :members:
 

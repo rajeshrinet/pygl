@@ -15,12 +15,12 @@ import sys
 
 # -- Project information -----------------------------------------------------
 
-project = 'PyMAFT'
+project = 'PyGL'
 copyright = '2020, Rajesh Singh'
 
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = '2.0.1'
 
 
 # -- General configuration ---------------------------------------------------

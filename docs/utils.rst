@@ -1,21 +1,21 @@
-Utils: Miscellaneous function
+Utils 
 ==================================
 
-.. automethod:: pymaft.utils.azimuthalAverage
+.. automethod:: pygl.utils.azimuthalAverage
 
-.. automethod:: pymaft.utils.bubble
+.. automethod:: pygl.utils.bubble
 
-.. automethod:: pymaft.utils.droplet
+.. automethod:: pygl.utils.droplet
 
-.. automethod:: pymaft.utils.ellipseDroplet
+.. automethod:: pygl.utils.ellipseDroplet
 
-.. automethod:: pymaft.utils.structureFactor
+.. automethod:: pygl.utils.structureFactor
 
-.. automethod:: pymaft.utils.structureFactor
+.. automethod:: pygl.utils.structureFactor
 
 
 Differentiation using loops without matrices
 ------------------------------------------------------
 finite difference using explicit loops - differs from the implmentation in dms.pyx 
-.. autoclass:: pymaft.utils.FiniteDifference
+.. autoclass:: pygl.utils.FiniteDifference
     :members:

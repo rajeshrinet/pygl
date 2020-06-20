@@ -1,3 +1,3 @@
-import pymaft.dms
-import pymaft.solvers
-import pymaft.utils
+import pygl.dms
+import pygl.solvers
+import pygl.utils

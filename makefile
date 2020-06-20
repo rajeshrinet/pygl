@@ -3,32 +3,32 @@ path=examples
 recursive=True
 
 make:
-	@echo Installing pymaft...
+	@echo Installing pygl...
 	${PYTHON} setup.py install
 
 clean-local:
 	@echo removing local compiled files
-	rm pymaft/*.c pymaft/*.html pymaft/*.cpp
+	rm pygl/*.c pygl/*.html pygl/*.cpp
 
 clean:
 	@echo removing all compiled files
 	${PYTHON} setup.py clean
-	rm pymaft/*.c pymaft/*.html 
+	rm pygl/*.c pygl/*.html 
 	
 env:
 	@echo creating conda environment...
 	conda env create --file environment.yml
-	# conda activate pymaft
-	@echo use make to install pymaft
+	# conda activate pygl
+	@echo use make to install pygl
 
 test:
-	@echo testing pymaft...
-	cd pymaft/tests/ && python installTests.py
+	@echo testing pygl...
+	cd pygl/tests/ && python installTests.py
 
 nbtest:
 	@echo testing example notebooks...
 	@echo test $(path)
-	cd pymaft/tests/ && python testNotebooks.py --path $(path) --recursive $(recursive)
+	cd pygl/tests/ && python testNotebooks.py --path $(path) --recursive $(recursive)
 
 
 pypitest:
