@@ -25,10 +25,10 @@ cdef class Stokes:
 
     Example
     ----------
-    >>> import pymaft 
+    >>> import pygl 
     >>> eta    = .1
     >>> grid   = {"dim":2, "Nx":32, "Ny":32}
-    >>> stokes = pymaft.solvers.Stokes(eta, grid)
+    >>> stokes = pygl.solvers.Stokes(eta, grid)
 
    """
 
@@ -91,10 +91,10 @@ cdef class Stokes:
 
         Example
         ----------
-        >>> import pymaft 
+        >>> import pygl 
         >>> eta    = .1
         >>> grid   = {"dim":2, "Nx":32, "Ny":32}
-        >>> stokes = pymaft.solvers.Stokes(eta, grid)
+        >>> stokes = pygl.solvers.Stokes(eta, grid)
         >>> fkx    = np.random.random((32, 32))
         >>> fky    = np.random.random((32, 32))
         >>> stokes.solve( (fkx, fky) )

@@ -10,15 +10,15 @@ setup(
     name='pygl',
     version='2.0.2',
     url='https://github.com/rajeshrinet/pygl',
-    author='The PyMAFT team',
+    author='The PyGL team',
     license='MIT',
-    description='PyMAFT is a numerical library for simulations of Models of Active Field Theories in Python.',
-    long_description='PyMAFT is a numerical library for simulations of Models of Active Field Theories in Python.\
+    description='PyGL is a numerical library for simulations of field theories in Python.',
+    long_description='PyGL is a numerical library for simulations of field theories in Python. \
                       It constructs differentiation matrices using finite-difference and spectral methods. \
                       It also allows to solve Stokes equation using a spectral method, which satisfies compressibility exactly. \
                        The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation \
                        in both two and three space ',
-    platforms='works on all platforms (such as LINUX, macOS, and Microsoft Windows)',
+    platforms='tested on LINUX and macOS',
     ext_modules=cythonize([ Extension("pygl/*", ["pygl/*.pyx"],
         include_dirs=[numpy.get_include()],
         )],

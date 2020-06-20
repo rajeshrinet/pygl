@@ -1,5 +1,5 @@
 """
-Unittesting for the pymaft module.
+Unittesting for the pygl module.
 """
 import sys
 import pystokes
