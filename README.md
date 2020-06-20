@@ -11,7 +11,7 @@
 ![Self-shearing instability in active scalar field theory](examples/ssi.gif)
 
 ## About
-[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. GL corresponds to the [Ginzburg–Landau](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory)x. The library constructs differentiation matrices using finite-difference and spectral methods. It also allows to solve Stokes equation using a spectral method, which satisfies compressibility exactly. The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation (implementation for non-zero Reynolds number is planned) in both two and three space dimensions.
+[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. The name GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library constructs differentiation matrices using finite-difference and spectral methods. It also allows to solve Stokes equation using a spectral method, which satisfies compressibility exactly. The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation (implementation for non-zero Reynolds number is planned) in both two and three space dimensions.
 
 The above simulation is done using PyGL. It shows that the droplet growth is interrupted via a self-shearing instability for contractile stress in active model H. Read more: https://arxiv.org/abs/1907.04819
 
