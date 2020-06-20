@@ -1,4 +1,4 @@
-name: pymaft
+name: pygl
 channels:
   - conda-forge
 dependencies:
