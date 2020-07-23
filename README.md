@@ -23,9 +23,10 @@
 Clone (or download) the repository and use a terminal to install using
 
 ```
-git clone https://github.com/rajeshrinet/pygibbs.git
-cd pygibbs
-python setup.py install
+>> git clone https://github.com/rajeshrinet/pygibbs.git
+>> cd pygibbs
+>> pip install -r requirements.txt
+>> python setup.py install
 ``` 
 
 PyGibbs requires the following software 
@@ -36,8 +37,9 @@ PyGibbs requires the following software
 
 ## Pip
 Alternatively install latest PyPI version
+
 ```
-pip install pygibbs 
+>> pip install pygibbs 
 ```
 
 
