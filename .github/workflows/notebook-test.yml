@@ -14,13 +14,13 @@ jobs:
       - name: Setup Miniconda
         uses: goanpeca/setup-miniconda@v1.2.0
         with:
-         activate-environment: pygl
+         activate-environment: pygibbs
          environment-file: environment.yml
          # auto-activate-base: true
-      - name: make-pygl
+      - name: make-pygibbs
         shell: bash -l {0}
         run: |
-          conda activate pygl
+          conda activate pygibbs
           make
           # make nbtest
       - name: testing-notebooks

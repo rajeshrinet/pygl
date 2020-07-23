@@ -1,2 +1,2 @@
-include pygl/*pyx
-include pygl/*pxd
+include pygibbs/*pyx
+include pygibbs/*pxd

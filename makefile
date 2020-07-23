@@ -23,12 +23,12 @@ env:
 
 test:
 	@echo testing pygibbs...
-	cd pygibbs/tests/ && python installTests.py
+	cd tests/ && python installTests.py
 
 nbtest:
 	@echo testing example notebooks...
 	@echo test $(path)
-	cd pygibbs/tests/ && python testNotebooks.py --path $(path) --recursive $(recursive)
+	cd tests/ && python testNotebooks.py --path $(path) --recursive $(recursive)
 
 
 pypitest:

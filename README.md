@@ -3,9 +3,9 @@
 ## PyGibbs: Field theoretic simulations in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pygibbs/master?filepath=examples) 
 ![Installation](https://github.com/rajeshrinet/pygibbs/workflows/Installation/badge.svg)
 ![Notebooks](https://github.com/rajeshrinet/pygibbs/workflows/Notebooks/badge.svg)
-[![Documentation Status](https://readthedocs.org/projects/pygibbs/badge/?version=latest)](https://pygl.readthedocs.io/en/latest/?badge=latest)
-[![PyPI version](https://badge.fury.io/py/pygibbs.svg)](https://badge.fury.io/py/pygl)
-[![Downloads](https://pepy.tech/badge/pygibbs)](https://pepy.tech/project/pygl)
+[![Documentation Status](https://readthedocs.org/projects/pygibbs/badge/?version=latest)](https://pygibbs.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/pygibbs.svg)](https://badge.fury.io/py/pygibbs)
+[![Downloads](https://pepy.tech/badge/pygibbs)](https://pepy.tech/project/pygibbs)
 ![License](https://img.shields.io/github/license/rajeshrinet/pygibbs) 
 
 [About](#about) |  [Documentation](https://pygibbs.readthedocs.io/en/latest/) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
