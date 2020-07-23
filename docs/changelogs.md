@@ -1,7 +1,7 @@
-# PyRoss changelogs
+# PyGibbs changelogs
 
-## 2.0.0
-* rename package to pygl 
+## 0.0.2
+* updates to the core
 
-## 1.0.0 
+## 0.0.1 
 * first version on PyPI

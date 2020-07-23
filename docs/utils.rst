@@ -1,21 +1,21 @@
 Utils 
 ==================================
 
-.. automethod:: pygl.utils.azimuthalAverage
+.. automethod:: pygibbs.utils.azimuthalAverage
 
-.. automethod:: pygl.utils.bubble
+.. automethod:: pygibbs.utils.bubble
 
-.. automethod:: pygl.utils.droplet
+.. automethod:: pygibbs.utils.droplet
 
-.. automethod:: pygl.utils.ellipseDroplet
+.. automethod:: pygibbs.utils.ellipseDroplet
 
-.. automethod:: pygl.utils.structureFactor
+.. automethod:: pygibbs.utils.structureFactor
 
-.. automethod:: pygl.utils.structureFactor
+.. automethod:: pygibbs.utils.structureFactor
 
 
 Differentiation using loops without matrices
 ------------------------------------------------------
 finite difference using explicit loops - differs from the implmentation in dms.pyx 
-.. autoclass:: pygl.utils.FiniteDifference
+.. autoclass:: pygibbs.utils.FiniteDifference
     :members:
