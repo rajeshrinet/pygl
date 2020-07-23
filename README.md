@@ -1,4 +1,4 @@
-![Imagel](https://raw.githubusercontent.com/rajeshrinet/pygiibs/master/examples/banner.jpg)
+![Imagel](https://raw.githubusercontent.com/rajeshrinet/pygibbs/master/examples/banner.jpg)
 
 ## PyGibbs: Field theoretic simulations in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pygibbs/master?filepath=examples) 
 ![Installation](https://github.com/rajeshrinet/pygibbs/workflows/Installation/badge.svg)
