@@ -1,17 +1,11 @@
-![Self-propulsion of active droplets](examples/banner.jpeg)
-## PyGL: Field theoretic simulations in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pygl/master?filepath=examples) 
-![CI](https://github.com/rajeshrinet/pygl/workflows/CI/badge.svg)
-![Notebooks](https://github.com/rajeshrinet/pygl/workflows/Notebooks/badge.svg)
-[![Documentation Status](https://readthedocs.org/projects/pygl/badge/?version=latest)](https://pygl.readthedocs.io/en/latest/?badge=latest)
-[![PyPI version](https://badge.fury.io/py/pygl.svg)](https://badge.fury.io/py/pygl)
-[![Downloads](https://pepy.tech/badge/pygl)](https://pepy.tech/project/pygl)
-![License](https://img.shields.io/github/license/rajeshrinet/pygl) 
+![Self-propulsion of active droplets](https://raw.githubusercontent.com/rajeshrinet/pygl/master/examples/banner.jpeg)
+## PyGL: Field theoretic simulations in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pygl/master?filepath=examples) ![CI](https://github.com/rajeshrinet/pygl/workflows/CI/badge.svg) ![Notebooks](https://github.com/rajeshrinet/pygl/workflows/Notebooks/badge.svg) [![Documentation Status](https://readthedocs.org/projects/pygl/badge/?version=latest)](https://pygl.readthedocs.io/en/latest/?badge=latest)[![PyPI version](https://badge.fury.io/py/pygl.svg)](https://badge.fury.io/py/pygl) [![Downloads](https://pepy.tech/badge/pygl)](https://pepy.tech/project/pygl)
 
 [About](#about) |  [Documentation](https://pygl.readthedocs.io/en/latest/) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
 
 
 ## About
-[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. The name GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library constructs differentiation matrices using finite-difference and spectral methods. It also allows to solve Stokes equation using a spectral method, which satisfies compressibility exactly. The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation (implementation for non-zero Reynolds number is planned) in both two and three space dimensions.
+[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library constructs differentiation matrices using finite-difference and spectral methods. It also allows to compute fluid flow on a two-dimensional and three-dimensional grid by solve the Stokes equation using a spectral method. The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation (implementation for non-zero Reynolds number is planned) in both two and three space dimensions.
  
  
 ## News

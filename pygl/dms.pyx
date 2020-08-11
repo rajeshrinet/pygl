@@ -101,7 +101,7 @@ cdef class FD:
 @cython.cdivision(True)
 cdef class FourierSpectral:
     ''' 
-    Spectral method using Fourier tranform to compute the differentiation matrix (DM)
+    Spectral method using Fourier tranform to compute differentiation matrices (DM)
     '''
     cdef:
         readonly int Nx, Ny, dim
@@ -157,7 +157,7 @@ cdef class FourierSpectral:
     cpdef dealias(self, double kDA):        
         '''
         dealias operator
-        kDA: how much to dealias
+        kDA: fraction of the wavectors which are not set to zero
         '''
         kxx = 2*np.pi*np.fft.fftfreq(self.Nx)
         kyy = 2*np.pi*np.fft.fftfreq(self.Ny)

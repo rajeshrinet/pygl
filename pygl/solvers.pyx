@@ -12,7 +12,7 @@ ctypedef np.float_t DTYPE_t
 @cython.cdivision(True)
 cdef class Stokes:
     """
-    Solving Stokes equation on a structured grid. 
+    Numerical solution of Stokes equation on 2D or 3D grid. 
 
     ...
 

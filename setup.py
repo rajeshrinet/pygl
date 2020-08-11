@@ -1,24 +1,35 @@
 import numpy
-import os, sys 
+import os, sys, re
 from Cython.Build import cythonize
 import Cython.Compiler.Options
 Cython.Compiler.Options.annotate=True
 from setuptools import setup, Extension
 
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
+
+cwd = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(cwd, 'pygl', '__init__.py')) as fp:
+    for line in fp:
+        m = re.search(r'^\s*__version__\s*=\s*([\'"])([^\'"]+)\1\s*$', line)
+        if m:
+            version = m.group(2)
+            break
+    else:
+        raise RuntimeError('Unable to find own __version__ string')
+
+
 setup(
     name='pygl',
-    version='2.0.2',
+    version=version,
     url='https://github.com/rajeshrinet/pygl',
     author='The PyGL team',
     license='MIT',
     description='PyGL is a numerical library for simulations of field theories in Python.',
-    long_description='PyGL is a numerical library for simulations of field theories in Python. \
-                      It constructs differentiation matrices using finite-difference and spectral methods. \
-                      It also allows to solve Stokes equation using a spectral method, which satisfies compressibility exactly. \
-                       The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation \
-                       in both two and three space ',
-    platforms='tested on LINUX and macOS',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     ext_modules=cythonize([ Extension("pygl/*", ["pygl/*.pyx"],
         include_dirs=[numpy.get_include()],
         )],
