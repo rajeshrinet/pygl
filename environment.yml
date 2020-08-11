@@ -1,4 +1,4 @@
-name: pygibbs
+name: pygl
 channels:
   - conda-forge
 dependencies:

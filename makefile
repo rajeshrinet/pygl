@@ -3,32 +3,32 @@ path=examples
 recursive=True
 
 make:
-	@echo Installing pygibbs...
+	@echo Installing pygl...
 	${PYTHON} setup.py install
 
 clean-local:
 	@echo removing local compiled files
-	rm pygibbs/*.c pygl/*.html pygl/*.cpp
+	rm pygl/*.c pygl/*.html pygl/*.cpp
 
 clean:
 	@echo removing all compiled files
 	${PYTHON} setup.py clean
-	rm pygibbs/*.c pygl/*.html 
+	rm pygl/*.c pygl/*.html 
 	
 env:
 	@echo creating conda environment...
 	conda env create --file environment.yml
-	# conda activate pygibbs
-	@echo use make to install pygibbs
+	# conda activate pygl
+	@echo use make to install pygl
 
 test:
-	@echo testing pygibbs...
-	cd tests/ && python installTests.py
+	@echo testing pygl...
+	cd pygl/tests/ && python installTests.py
 
 nbtest:
 	@echo testing example notebooks...
 	@echo test $(path)
-	cd tests/ && python testNotebooks.py --path $(path) --recursive $(recursive)
+	cd pygl/tests/ && python testNotebooks.py --path $(path) --recursive $(recursive)
 
 
 pypitest:
