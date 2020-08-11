@@ -5,12 +5,8 @@
 
 
 ## About
-[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library constructs differentiation matrices using finite-difference and spectral methods. It also allows to compute fluid flow on a two-dimensional and three-dimensional grid by solve the Stokes equation using a spectral method. The library currently offers support for doing field theoretical simulation and a direct numerical simulation of the Stokes equation (implementation for non-zero Reynolds number is planned) in both two and three space dimensions.
+[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library constructs differentiation matrices using finite-difference and spectral methods. The library also allows to compute fluid flow on a 2D or 3D grid from the solution of the Stokes equation using a spectral solver. 
  
- 
-## News
-* Our paper has been highlighted in the Journal Club for Condensed Matter Physics with a [commentary](https://doi.org/10.36471/JCCM_March_2020_01).
-
 
 ## Installation
 Clone (or download) the repository and use a terminal to install using
@@ -43,6 +39,10 @@ See the [examples folder](https://github.com/rajeshrinet/pygl/tree/master/exampl
 * [Hydrodynamically interrupted droplet growth in scalar active matter](https://doi.org/10.1103/PhysRevLett.123.148005). Rajesh Singh and Michael E. Cates. Phys. Rev. Lett. 123, 148005 (2019).
 
 * [Self-propulsion of active droplets without liquid-crystalline order](https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.2.032024). Rajesh Singh, Elsen Tjhung, and Michael E. Cates. Phys. Rev. Research 2, 032024(R) (2020).
+
+
+## News
+* Our paper has been highlighted in the Journal Club for Condensed Matter Physics with a [commentary](https://doi.org/10.36471/JCCM_March_2020_01).
 
 
 ## Support
