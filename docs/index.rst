@@ -1,8 +1,8 @@
 PyGL API
 ==================================
-.. image:: ../examples/ssi.gif 
-  :width: 320
-  :alt: PyMAF banner
+.. image:: ../examples/banner.jpeg 
+  :width: 800
+  :alt: PyGL banner
 
 
 

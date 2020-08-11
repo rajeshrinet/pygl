@@ -1,5 +1,5 @@
 """
-Unittesting for the pygibbs module.
+Unittesting for the pygl module.
 """
 import sys
 import pystokes

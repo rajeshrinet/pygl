@@ -1,6 +1,6 @@
 ![Self-propulsion of active droplets](examples/banner.jpeg)
 ## PyGL: Field theoretic simulations in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pygl/master?filepath=examples) 
-![Installation](https://github.com/rajeshrinet/pygl/workflows/Installation/badge.svg)
+![CI](https://github.com/rajeshrinet/pygl/workflows/CI/badge.svg)
 ![Notebooks](https://github.com/rajeshrinet/pygl/workflows/Notebooks/badge.svg)
 [![Documentation Status](https://readthedocs.org/projects/pygl/badge/?version=latest)](https://pygl.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/pygl.svg)](https://badge.fury.io/py/pygl)
