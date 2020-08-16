@@ -10,22 +10,28 @@
  
 
 ## Installation
-Clone (or download) the repository and use a terminal to install using
+
+### From a checkout of this repository
+
+Install PyGL and required dependencies using
 
 ```
 >> git clone https://github.com/rajeshrinet/pygl.git
 >> cd pygl
+>> pip install -r requirements.txt
 >> python setup.py install
 ``` 
 
-PyGL requires the following software 
+Install PyGL and its dependencies in a `pygl` environment:
 
+>> git clone https://github.com/rajeshrinet/pygl.git
+>> cd pygl
+>> make env
+>> conda activate pygl
+>> make
 
-- Python 2.6+ or Python 3.4+
-- [Cython 0.25.x+](http://docs.cython.org/en/latest/index.html) |  [Matplotlib 2.0.x+](https://matplotlib.org) | [NumPy 1.x+](http://www.numpy.org) | [SciPy 1.1.x+](https://www.scipy.org/) 
-
-## Pip
-Alternatively install latest PyPI version
+### Pip
+Alternatively, install the latest PyPI version
 
 ```
 >> pip install pygl 
