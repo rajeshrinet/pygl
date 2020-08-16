@@ -1,11 +1,12 @@
 ![Self-propulsion of active droplets](https://raw.githubusercontent.com/rajeshrinet/pygl/master/examples/banner.jpeg)
-## PyGL: field theories without time-reversal symmetry in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pygl/master?filepath=examples) ![CI](https://github.com/rajeshrinet/pygl/workflows/CI/badge.svg) ![Notebooks](https://github.com/rajeshrinet/pygl/workflows/Notebooks/badge.svg) [![Documentation Status](https://readthedocs.org/projects/pygl/badge/?version=latest)](https://pygl.readthedocs.io/en/latest/?badge=latest)[![PyPI version](https://badge.fury.io/py/pygl.svg)](https://badge.fury.io/py/pygl) [![Downloads](https://pepy.tech/badge/pygl)](https://pepy.tech/project/pygl)
+## PyGL: statistical field theory in Python [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rajeshrinet/pygl/master?filepath=examples) ![CI](https://github.com/rajeshrinet/pygl/workflows/CI/badge.svg) ![Notebooks](https://github.com/rajeshrinet/pygl/workflows/Notebooks/badge.svg) [![Documentation Status](https://readthedocs.org/projects/pygl/badge/?version=latest)](https://pygl.readthedocs.io/en/latest/?badge=latest)[![PyPI version](https://badge.fury.io/py/pygl.svg)](https://badge.fury.io/py/pygl) [![Downloads](https://pepy.tech/badge/pygl)](https://pepy.tech/project/pygl)
 
 [About](#about) |  [Documentation](https://pygl.readthedocs.io/en/latest/) | [News](#news) | [Installation](#installation) | [Examples](#examples) | [Publications ](#publications)| [Support](#support) | [License](#license)
 
 
 ## About
-[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library constructs differentiation matrices using finite-difference and spectral methods. The library also allows to compute fluid flow on a 2D or 3D grid from the solution of the Stokes equation using a spectral solver. 
+[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for statistical field theory in Python. The name GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library has been specifically designed to study field theories without time-reversal symmetry. The library can be used to study models of statistical physics of various symmetries and conservation laws. In particular, we allow models with mass and momentum conservations. The library constructs differentiation matrices using finite-difference and spectral methods. To study the role of momentum conservation, the library also allows computing fluid flow from the solution of the Stokes equation. 
+
  
 
 ## Installation
