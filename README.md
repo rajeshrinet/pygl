@@ -24,11 +24,13 @@ Install PyGL and required dependencies using
 
 Install PyGL and its dependencies in a `pygl` environment:
 
+```
 >> git clone https://github.com/rajeshrinet/pygl.git
 >> cd pygl
 >> make env
 >> conda activate pygl
 >> make
+```
 
 ### Pip
 Alternatively, install the latest PyPI version
