@@ -5,7 +5,7 @@
 
 
 ## About
-[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for simulations of field theories in Python. GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library constructs differentiation matrices using finite-difference and spectral methods. The library also allows to compute fluid flow on a 2D or 3D grid from the solution of the Stokes equation using a spectral solver. 
+[PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for Statistical Field Theory in Python. The name GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library constructs differentiation matrices using finite-difference and spectral methods. The library also allows to compute fluid flow on a 2D or 3D grid from the solution of the Stokes equation using a spectral solver. 
  
 
 ## Installation

@@ -19,10 +19,138 @@ DTYP1   = np.int32
 ctypedef np.float_t DTYPE_t 
 
 
+
+cpdef structureFactor(u, dim):
+    """
+    * Computes S(k) = <u(k)u(-k)> given the u(r)
+    * This is computed using FFT of u to obtain u(k)
+    * For a real field u, the multiplication of u(k)u(-k) 
+    is same as (abs(u(k)))^2
+
+
+    Parameters
+    ----------
+    u: A field on a grid in dim dimensions
+    dim: dimensionality
+
+    Returns
+    -------
+        structureFactor defined (abs(u(k)))^2/N^2
+    """
+
+
+    if dim==1:
+        uk = np.fft.fft(u)
+        uk = np.fft.fftshift(uk)
+        uu = np.abs(uk)
+
+    if dim==2:
+        uk = np.fft.fft2(u)
+        uk = np.fft.fftshift(uk)
+        uu = np.abs(uk)
+    
+    if dim==3:
+        uk = np.fft.fftn(u)
+        uk = np.fft.fftshift(uk)
+        uu = np.abs(uk)
+
+    return (uu*uu)/(np.size(u))
+    
+
+
+
+cpdef avgFuncKspace(uk, k2, bins):
+    """
+    Obtains radial distribution of field in Fourier space
+    from square of the k vector provided
+
+    Parameters
+    ----------
+    uk: A field in Fourier space 
+    k2: square of the k field on that field 
+    bins: how many bins to do
+
+    Returns
+    -------
+         ua: the averaged field along radial direction 
+         bn: value of the bin
+    """
+    
+    rr = k2.flatten()        
+    rs = np.sort(rr)
+    ri = np.argsort(rr)
+
+    u  = uk.flatten();   ua = np.zeros(bins)
+    u  = u[ri]
+
+    ht, bns = np.histogram(rs, bins)
+    bn = 0.5*(bns[:-1] + bns[1:])
+    hm = np.cumsum(ht)
+
+    ua[0] = np.mean( u[0:ht[0]] )
+    ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
+    for i in range(1, bins-1):
+        ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
+    return ua, bn 
+
+
+
+cpdef avgFunc(u, bins, dim=2):
+    """
+    Obtains radial distribution of field 
+    from Cartesian coordinates in 2D and 3D
+
+    Parameters
+    ----------
+    u: A field defined on a grid of dimension dim 
+    bins: how many bins in which to sum the field 
+    dim: dimension
+
+    Returns
+    -------
+         ua: the averaged field along radial direction 
+         bn: value of the bin
+    """
+    
+    if dim==2:
+        Nx, Ny = np.shape(u)
+        xx, yy = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2))
+        rr = np.sqrt(xx*xx + yy*yy)
+    if dim==3:
+        Nx, Ny, Nz = np.shape(u)
+        xx, yy, zz = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2),np.arange(-Nz/2, Nz/2))
+        rr = np.sqrt(xx*xx + yy*yy + zz*zz)
+    
+    rr = rr.flatten()        
+    rs = np.sort(rr)
+    ri = np.argsort(rr)
+
+    u  = u.flatten();   ua = np.zeros(bins)
+    u  = u[ri]
+
+    ht, bns = np.histogram(rs, bins)
+    bn = 0.5*(bns[:-1] + bns[1:])
+    hm = np.cumsum(ht)
+
+    ua[0] = np.mean( u[0:ht[0]] )
+    ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
+    for i in range(1, bins-1):
+        ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
+    return ua, bn
+
+
+
 def azimuthalAverage(ff):
     """
-    Calculate the azimuthally averaged radial profile.
-    ff - The 2D function
+    Obtains radial distribution of field ff
+
+    Parameters
+    ----------
+    ff: A field defined on a grid of two-dimension 
+
+    Returns
+    -------
+         fr: the averaged field along radial direction 
     """
     y, x = np.indices(ff.shape)
     r = np.hypot(x, y)
@@ -144,59 +272,6 @@ cpdef twoBubbles(u, radi1, locx1, locy1, radi2, locx2, locy2, phiP=1, phiM=-1):
 ##        return v1*fac
 ##         
         
-cpdef structureFactor( u, dim):
-    '''
-    Computes S(k) = <u(k)u(-k)> given the u(r)
-    This is computed using FFT of u to obtain u(k)
-    A multiplication of u(k)u(-k) is same as (abs(u(k)))^2
-    if the field u is real using the definition of complex numbers
-    '''
-    if dim==1:
-        uk = np.fft.fft(u)
-        uk = np.fft.fftshift(uk)
-        uu = np.abs(uk)
-
-    if dim==2:
-        uk = np.fft.fft2(u)
-        uk = np.fft.fftshift(uk)
-        uu = np.abs(uk)
-    
-    if dim==3:
-        uk = np.fft.fftn(u)
-        uk = np.fft.fftshift(uk)
-        uu = np.abs(uk)
-
-    return (uu*uu)/(np.size(u))
-    
-
-cpdef avgFunc(u, bins, dim):
-    if dim==2:
-        Nx, Ny = np.shape(u)
-        xx, yy = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2))
-        rr = np.sqrt(xx*xx + yy*yy)
-    if dim==3:
-        Nx, Ny, Nz = np.shape(u)
-        xx, yy, zz = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2),np.arange(-Nz/2, Nz/2))
-        rr = np.sqrt(xx*xx + yy*yy + zz*zz)
-    
-    rr = rr.flatten()        
-    rs = np.sort(rr)
-    ri = np.argsort(rr)
-
-    u  = u.flatten();   ua = np.zeros(bins)
-    u  = u[ri]
-
-    ht, bns = np.histogram(rs, bins)
-    bn = 0.5*(bns[:-1] + bns[1:])
-    hm = np.cumsum(ht)
-
-    ua[0] = np.mean( u[0:ht[0]] )
-    ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
-    for i in range(1, bins-1):
-        ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
-    return ua, bn
-
-
 
 
 

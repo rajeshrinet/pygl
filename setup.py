@@ -27,7 +27,7 @@ setup(
     url='https://github.com/rajeshrinet/pygl',
     author='The PyGL team',
     license='MIT',
-    description='PyGL is a numerical library for simulations of field theories in Python.',
+    description='PyGL is a numerical library for statistical field theory in Python',
     long_description=long_description,
     long_description_content_type='text/markdown',
     ext_modules=cythonize([ Extension("pygl/*", ["pygl/*.pyx"],
