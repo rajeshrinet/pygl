@@ -59,7 +59,7 @@ cpdef structureFactor(u, dim):
 
 
 
-cpdef avgFuncKspace(uk, k2, bins):
+cpdef avgFuncKspace(uk, k, bins):
     """
     Obtains radial distribution of field in Fourier space
     from square of the k vector provided
@@ -67,7 +67,7 @@ cpdef avgFuncKspace(uk, k2, bins):
     Parameters
     ----------
     uk: A field in Fourier space 
-    k2: square of the k field on that field 
+    k:  magnitude of the k field on that field 
     bins: how many bins to do
 
     Returns
@@ -76,7 +76,7 @@ cpdef avgFuncKspace(uk, k2, bins):
          bn: value of the bin
     """
     
-    rr = k2.flatten()        
+    rr = k.flatten()        
     rs = np.sort(rr)
     ri = np.argsort(rr)
 
@@ -91,7 +91,8 @@ cpdef avgFuncKspace(uk, k2, bins):
     ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
     for i in range(1, bins-1):
         ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
-    return ua, bn 
+    n1 = np.size(bn)
+    return bn[1:n1-1], ua[1:n1-1]
 
 
 
@@ -169,6 +170,82 @@ def azimuthalAverage(ff):
 
     fr = tbin / nr
     return fr
+
+
+def azimuthalAverageOld(ff):
+    """
+    Obtains radial distribution of field ff
+
+    Parameters
+    ----------
+    ff: A field defined on a grid of two-dimension 
+
+    Returns
+    -------
+         fr: the averaged field along radial direction 
+    """
+    y, x = np.indices(ff.shape)
+    r = np.hypot(x, y)
+
+    ind = np.argsort(r.flat)
+    r_sorted = r.flat[ind]
+    i_sorted = ff.flat[ind]
+    r_int    = r_sorted.astype(int)
+
+    deltar   = r_int[1:] - r_int[:-1]  
+    rind     = np.where(deltar)[0]       
+    nr       = rind[1:] - rind[:-1]        
+    
+    csim = np.cumsum(i_sorted, dtype=float)
+    tbin = csim[rind[1:]] - csim[rind[:-1]]
+
+    fr = tbin / nr
+    return fr
+
+
+def azimuthalAverage(image, center=None):
+    """
+    Calculate the azimuthally averaged radial profile.
+
+    image - The 2D image
+    center - The [x,y] pixel coordinates used as the center. The default is
+             None, which then uses the center of the image (including
+             fracitonal pixels).
+
+    """
+    # Calculate the indices from the image
+    y, x = np.indices(image.shape)
+
+    if not center:
+        center = np.array([(x.max()-x.min())/2.0, (x.max()-x.min())/2.0])
+
+    r = np.hypot(x - center[0], y - center[1])
+
+    # Get sorted radii
+    ind = np.argsort(r.flat)
+    r_sorted = r.flat[ind]
+    i_sorted = image.flat[ind]
+
+    # Get the integer part of the radii (bin size = 1)
+    r_int = r_sorted.astype(int)
+
+    # Find all pixels that fall within each radial bin.
+    deltar = r_int[1:] - r_int[:-1]  # Assumes all radii represented
+    rind = np.where(deltar)[0]       # location of changed radius
+    nr = rind[1:] - rind[:-1]        # number of radius bin
+
+    # Cumulative sum to figure out sums for each radius bin
+    csim = np.cumsum(i_sorted, dtype=float)
+    tbin = csim[rind[1:]] - csim[rind[:-1]]
+
+    radial_prof = tbin / nr
+
+    return radial_prof
+
+
+def radial_profile(data, r, bins_N=100):
+    ring_brightness, radius = np.histogram(r, weights=data, bins=bins_N)
+    return radius[1:], ring_brightness    
 
 
 
