@@ -96,7 +96,7 @@ cpdef avgFuncKspace(uk, k, bins):
 
 
 
-cpdef avgFunc(u, bins, dim=2):
+cpdef avgFunc(u, r):
     """
     Obtains radial distribution of field 
     from Cartesian coordinates in 2D and 3D
@@ -113,31 +113,55 @@ cpdef avgFunc(u, bins, dim=2):
          bn: value of the bin
     """
     
-    if dim==2:
-        Nx, Ny = np.shape(u)
-        xx, yy = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2))
-        rr = np.sqrt(xx*xx + yy*yy)
-    if dim==3:
-        Nx, Ny, Nz = np.shape(u)
-        xx, yy, zz = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2),np.arange(-Nz/2, Nz/2))
-        rr = np.sqrt(xx*xx + yy*yy + zz*zz)
-    
-    rr = rr.flatten()        
-    rs = np.sort(rr)
-    ri = np.argsort(rr)
+    #if dim==2:
+    #    Nx, Ny = np.shape(u)
+    #    xx, yy = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2))
+    #    rr = np.sqrt(xx*xx + yy*yy)
+    #if dim==3:
+    #    Nx, Ny, Nz = np.shape(u)
+    #    xx, yy, zz = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2),np.arange(-Nz/2, Nz/2))
+    #    rr = np.sqrt(xx*xx + yy*yy + zz*zz)
+    #
+    #y, x = np.indices(u.shape)
+    #rr = np.hypot(x, y)
+    #rr = rr.flatten()        
+    #rs = np.sort(rr)
+    #ri = np.argsort(rr)
 
-    u  = u.flatten();   ua = np.zeros(bins)
-    u  = u[ri]
+    #u  = u.flatten();   ua = np.zeros(bins)
+    #u  = u[ri]
 
-    ht, bns = np.histogram(rs, bins)
-    bn = 0.5*(bns[:-1] + bns[1:])
-    hm = np.cumsum(ht)
+    #ht, bns = np.histogram(rs, bins)
+    #bn = 0.5*(bns[:-1] + bns[1:])
+    #hm = np.cumsum(ht)
 
-    ua[0] = np.mean( u[0:ht[0]] )
-    ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
-    for i in range(1, bins-1):
-        ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
-    return ua, bn
+    #ua[0] = np.mean( u[0:ht[0]] )
+    #ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
+    #for i in range(1, bins-1):
+    #    ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
+    #return ua, bn
+    #y, x = np.indices(u.shape)
+    #r = np.hypot(x, y)
+
+    #ind = np.argsort(r.flat)
+    #r_sorted = r.flat[ind]
+    #i_sorted = u.flat[ind]
+    #r_int    = r_sorted.astype(int)
+
+    #deltar   = r_int[1:] - r_int[:-1]  
+    #rind     = np.where(deltar)[0]       
+    #nr       = rind[1:] - rind[:-1]        
+    #
+    #csim = np.cumsum(i_sorted, dtype=float)
+    #tbin = csim[rind[1:]] - csim[rind[:-1]]
+
+    #fr = tbin / nr
+    r = r.astype(np.int)
+
+    tbin = np.bincount(r.ravel(), u.ravel())
+    nr = np.bincount(r.ravel())
+    radialprofile = tbin / nr
+    return radialprofile, nr
 
 
 
