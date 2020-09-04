@@ -3,6 +3,8 @@ Utils
 
 .. automethod:: pygl.utils.azimuthalAverage
 
+.. automethod:: pygl.utils.azimuthalAverage2
+
 .. automethod:: pygl.utils.bubble
 
 .. automethod:: pygl.utils.droplet
@@ -14,8 +16,7 @@ Utils
 .. automethod:: pygl.utils.structureFactor
 
 
-Differentiation using loops without matrices
+Differentiation using loops (unlike pygl.dms)
 ------------------------------------------------------
-finite difference using explicit loops - differs from the implmentation in dms.pyx 
 .. autoclass:: pygl.utils.FiniteDifference
     :members:

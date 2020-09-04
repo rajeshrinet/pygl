@@ -19,7 +19,9 @@ DTYP1   = np.int32
 ctypedef np.float_t DTYPE_t 
 
 
-
+##-----------------------------------------------------------
+## Obtain structureFactor and radial profiles of a field u 
+##-----------------------------------------------------------
 cpdef structureFactor(u, dim):
     """
     * Computes S(k) = <u(k)u(-k)> given the u(r)
@@ -47,40 +49,39 @@ cpdef structureFactor(u, dim):
     if dim==2:
         uk = np.fft.fft2(u)
         uk = np.fft.fftshift(uk)
-        uu = np.abs(uk)
+        u2 = np.abs(uk*uk)
     
     if dim==3:
         uk = np.fft.fftn(u)
         uk = np.fft.fftshift(uk)
-        uu = np.abs(uk)
+        u2 = np.abs(uk*uk)
 
-    return (uu*uu)/(np.size(u))
+    return u2/(np.size(u))
     
 
 
 
-cpdef avgFuncKspace(uk, k, bins):
+cpdef azimuthalAverage(u, r, bins):
     """
-    Obtains radial distribution of field in Fourier space
-    from square of the k vector provided
+    Obtains radial distribution of field 
 
     Parameters
     ----------
-    uk: A field in Fourier space 
-    k:  magnitude of the k field on that field 
+    u: A field variable to be averaged
+    r: Radial vector of same shape
     bins: how many bins to do
 
     Returns
     -------
-         ua: the averaged field along radial direction 
-         bn: value of the bin
+         r: value of the radial component
+         ur: the averaged field along radial direction 
     """
     
-    rr = k.flatten()        
+    rr = r.flatten()        
     rs = np.sort(rr)
     ri = np.argsort(rr)
 
-    u  = uk.flatten();   ua = np.zeros(bins)
+    u  = u.flatten();   ua = np.zeros(bins)
     u  = u[ri]
 
     ht, bns = np.histogram(rs, bins)
@@ -95,160 +96,26 @@ cpdef avgFuncKspace(uk, k, bins):
     return bn[1:n1-1], ua[1:n1-1]
 
 
-
-cpdef avgFunc(u, r):
+def azimuthalAverage2(u):
     """
-    Obtains radial distribution of field 
-    from Cartesian coordinates in 2D and 3D
+    Obtains radial distribution of field u
 
     Parameters
     ----------
-    u: A field defined on a grid of dimension dim 
-    bins: how many bins in which to sum the field 
-    dim: dimension
+    u: A field defined on a grid of two-dimension 
 
     Returns
     -------
-         ua: the averaged field along radial direction 
-         bn: value of the bin
+         ur: the averaged field along radial direction 
     """
-    
-    #if dim==2:
-    #    Nx, Ny = np.shape(u)
-    #    xx, yy = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2))
-    #    rr = np.sqrt(xx*xx + yy*yy)
-    #if dim==3:
-    #    Nx, Ny, Nz = np.shape(u)
-    #    xx, yy, zz = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2),np.arange(-Nz/2, Nz/2))
-    #    rr = np.sqrt(xx*xx + yy*yy + zz*zz)
-    #
-    #y, x = np.indices(u.shape)
-    #rr = np.hypot(x, y)
-    #rr = rr.flatten()        
-    #rs = np.sort(rr)
-    #ri = np.argsort(rr)
-
-    #u  = u.flatten();   ua = np.zeros(bins)
-    #u  = u[ri]
-
-    #ht, bns = np.histogram(rs, bins)
-    #bn = 0.5*(bns[:-1] + bns[1:])
-    #hm = np.cumsum(ht)
-
-    #ua[0] = np.mean( u[0:ht[0]] )
-    #ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
-    #for i in range(1, bins-1):
-    #    ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
-    #return ua, bn
-    #y, x = np.indices(u.shape)
-    #r = np.hypot(x, y)
-
-    #ind = np.argsort(r.flat)
-    #r_sorted = r.flat[ind]
-    #i_sorted = u.flat[ind]
-    #r_int    = r_sorted.astype(int)
-
-    #deltar   = r_int[1:] - r_int[:-1]  
-    #rind     = np.where(deltar)[0]       
-    #nr       = rind[1:] - rind[:-1]        
-    #
-    #csim = np.cumsum(i_sorted, dtype=float)
-    #tbin = csim[rind[1:]] - csim[rind[:-1]]
-
-    #fr = tbin / nr
-    r = r.astype(np.int)
-
-    tbin = np.bincount(r.ravel(), u.ravel())
-    nr = np.bincount(r.ravel())
-    radialprofile = tbin / nr
-    return radialprofile, nr
-
-
-
-def azimuthalAverage(ff):
-    """
-    Obtains radial distribution of field ff
-
-    Parameters
-    ----------
-    ff: A field defined on a grid of two-dimension 
-
-    Returns
-    -------
-         fr: the averaged field along radial direction 
-    """
-    y, x = np.indices(ff.shape)
-    r = np.hypot(x, y)
-
-    ind = np.argsort(r.flat)
-    r_sorted = r.flat[ind]
-    i_sorted = ff.flat[ind]
-    r_int    = r_sorted.astype(int)
-
-    deltar   = r_int[1:] - r_int[:-1]  
-    rind     = np.where(deltar)[0]       
-    nr       = rind[1:] - rind[:-1]        
-    
-    csim = np.cumsum(i_sorted, dtype=float)
-    tbin = csim[rind[1:]] - csim[rind[:-1]]
-
-    fr = tbin / nr
-    return fr
-
-
-def azimuthalAverageOld(ff):
-    """
-    Obtains radial distribution of field ff
-
-    Parameters
-    ----------
-    ff: A field defined on a grid of two-dimension 
-
-    Returns
-    -------
-         fr: the averaged field along radial direction 
-    """
-    y, x = np.indices(ff.shape)
-    r = np.hypot(x, y)
-
-    ind = np.argsort(r.flat)
-    r_sorted = r.flat[ind]
-    i_sorted = ff.flat[ind]
-    r_int    = r_sorted.astype(int)
-
-    deltar   = r_int[1:] - r_int[:-1]  
-    rind     = np.where(deltar)[0]       
-    nr       = rind[1:] - rind[:-1]        
-    
-    csim = np.cumsum(i_sorted, dtype=float)
-    tbin = csim[rind[1:]] - csim[rind[:-1]]
-
-    fr = tbin / nr
-    return fr
-
-
-def azimuthalAverage(image, center=None):
-    """
-    Calculate the azimuthally averaged radial profile.
-
-    image - The 2D image
-    center - The [x,y] pixel coordinates used as the center. The default is
-             None, which then uses the center of the image (including
-             fracitonal pixels).
-
-    """
-    # Calculate the indices from the image
-    y, x = np.indices(image.shape)
-
-    if not center:
-        center = np.array([(x.max()-x.min())/2.0, (x.max()-x.min())/2.0])
-
+    y, x = np.indices(u.shape)
+    center = np.array([(x.max()-x.min())/2.0, (x.max()-x.min())/2.0])
     r = np.hypot(x - center[0], y - center[1])
 
     # Get sorted radii
     ind = np.argsort(r.flat)
     r_sorted = r.flat[ind]
-    i_sorted = image.flat[ind]
+    i_sorted = u.flat[ind]
 
     # Get the integer part of the radii (bin size = 1)
     r_int = r_sorted.astype(int)
@@ -262,19 +129,30 @@ def azimuthalAverage(image, center=None):
     csim = np.cumsum(i_sorted, dtype=float)
     tbin = csim[rind[1:]] - csim[rind[:-1]]
 
-    radial_prof = tbin / nr
+    ur = tbin / nr
 
-    return radial_prof
+    return ur
 
 
 def radial_profile(data, r, bins_N=100):
     ring_brightness, radius = np.histogram(r, weights=data, bins=bins_N)
     return radius[1:], ring_brightness    
+def radial_profile2(u, r):
+    tbin = np.bincount(r.ravel(), u.ravel())
+    nr = np.bincount(r.ravel())
+    radialprofile = tbin / nr
+    return radialprofile, nr
 
 
 
 
+
+
+
+
+##-------------------------------------
 ## readymade bubbles and droplets
+##-------------------------------------
 cpdef bubble(u, radi, locx=0, locy=0, phiP=1, phiM=-1):
     r2 = radi*radi
     Nx, Ny = np.shape(u)
