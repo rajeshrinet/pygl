@@ -7,6 +7,12 @@
 ## About
 [PyGL](https://github.com/rajeshrinet/pygl) is a numerical library for statistical field theory in Python. The name GL corresponds to the [Ginzburg–Landau theory](https://en.wikipedia.org/wiki/Ginzburg%E2%80%93Landau_theory). The library has been specifically designed to study field theories without time-reversal symmetry. The library can be used to study models of statistical physics of various symmetries and conservation laws. In particular, we allow models with mass and momentum conservations. The library constructs differentiation matrices using finite-difference and spectral methods. To study the role of momentum conservation, the library also allows computing fluid flow from the solution of the Stokes equation. 
 
+![Self-propulsion of active droplets](https://raw.githubusercontent.com/rajeshrinet/pystokes-misc/master/gallery/droplets/ssi.gif)
+
+
+The above simulation is done using PyGL. It shows microphase separation (phase separation arrested to a length-scale) is possible in suspensions of spherical active particles. We show, via a scalar field theory, that the droplet growth is interrupted via a self-shearing instability due to a stress of nonequilibirum origin. Read more: https://arxiv.org/abs/1907.04819
+
+
  
 
 ## Installation
