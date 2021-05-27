@@ -9,9 +9,7 @@
 
 ![Self-propulsion of active droplets](https://raw.githubusercontent.com/rajeshrinet/pystokes-misc/master/gallery/droplets/ssi.gif)
 
-
-The above simulation is done using PyGL. It shows microphase separation (phase separation arrested to a length-scale) is possible in suspensions of spherical active particles. We show, via a scalar field theory, that the droplet growth is interrupted via a self-shearing instability due to a stress of nonequilibirum origin. Read more: https://arxiv.org/abs/1907.04819
-
+The above simulation is done using PyGL. It shows steady-state microphase separation (phase separation arrested to a length-scale) in an active scalar field theory. A self-shearing instability interrupts the growth of droplets by splitting them. Read more: https://arxiv.org/abs/1907.04819
 
  
 
