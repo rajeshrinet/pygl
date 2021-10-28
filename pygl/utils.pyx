@@ -191,8 +191,8 @@ cpdef squareDroplet(u, radi, phiP=1, phiM=-1):
     return u
 
 
-cpdef ellipseDroplet(u, radi, phiP=1, phiM=-1):
-    r1, r2 = radi*.64, radi
+cpdef ellipseDroplet(u, radi, eRatio=0.64, phiP=1, phiM=-1):
+    r1, r2 = radi*eRatio, radi
     Nx, Ny = np.shape(u)
     for i in range(Nx):
         for j in range(Ny):
