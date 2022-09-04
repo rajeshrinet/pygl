@@ -1,8 +1,13 @@
 import  numpy as np
 cimport numpy as np
 cimport cython
-from libc.math cimport sqrt
+from libc.math cimport sqrt, pow, log, sin, cos
+from cython.parallel import prange
+
 cdef double PI = 3.14159265359
+fft2  = np.fft.fft2
+ifft2 = np.fft.ifft2
+randn = np.random.randn
 
 
 DTYPE   = np.float
@@ -73,7 +78,6 @@ cdef class Stokes:
        
         else:
             raise Exception('Current support is only for 2D or 3D')
-       
        
          
     cpdef solve(self, fk):
@@ -203,3 +207,82 @@ cdef class Stokes:
 
         return
 
+
+
+@cython.wraparound(False)
+@cython.boundscheck(False)
+@cython.cdivision(True)
+@cython.nonecheck(False)
+cdef class ModelB():
+    """
+    Simualting model B
+    """
+    cdef readonly int Nt, Ny, Nz, Ng, Nf, Tf
+    cdef readonly np.ndarray kx, ky, ksq, XX, du
+    cdef readonly double dt, h, a, b, kp, Df
+
+    def __init__(self, param):
+
+        self.Nt = param['Nt']
+        self.dt = param['dt']
+        self.Nf = param['Nf']
+        self.h  = param['h']
+        self.a  = param['a']
+        self.b  = param['b']
+        self.kp = param['kp']
+
+        self.Ng = param['Ng']
+        self.Tf =int(self.Nt/self.Nf)
+        self.Df = param['Df']
+        Ng = self.Ng
+        
+        self.XX  = np.zeros((int(self.Nf), Ng*Ng)) 
+        self.du  = np.zeros((Ng,Ng), dtype=np.complex128) 
+        
+        kx  = np.fft.fftfreq(Ng)*(2*np.pi/self.h)
+        ky  = np.fft.fftfreq(Ng)*(2*np.pi/self.h)
+        self.kx, self.ky = np.meshgrid(kx, ky) 
+        self.ksq = self.kx*self.kx + self.ky*self.ky
+    
+    
+    cpdef integrate(self, u):
+        '''  simulates the equation and plots it at different instants '''
+        cdef int ii=0, i ,Nt=self.Nt, Tf=self.Tf,
+        cdef double  simC=(100.0/self.Nt)
+
+        for i in range(Nt):          
+            self.rhs(u)
+            u = u + self.du
+
+            if i%(Tf)==0:  
+                self.XX[ii,:]=(np.real(ifft2(u))).flatten()
+                ii += 1   
+                if ii%100==0:
+                    print (int(i*simC), '% done')
+  
+                
+    cpdef rhs(self, uk):
+        '''
+        returns the right hand side of \dot{phi} in model B
+        \dot{phi} = Δ(a*u + b*u*u*u + kΔu + λ(∇u)^2) 
+        '''
+        cdef int i, j, Ng=self.Ng 
+        cdef double a=self.a, b=self.b, kp=self.kp, k2, dt=self.dt
+        cdef double [:, :] kx = self.kx
+        cdef double [:, :] ky = self.ky
+        cdef double [:, :] ksq = self.ksq
+        cdef complex [:, :] du  = self.du
+        cdef complex [:, :] u   = uk 
+        cdef complex Df = 1j*self.Df
+        
+        cdef double [:, :] rnx = randn(Ng, Ng)
+        cdef double [:, :] rny = randn(Ng, Ng)
+        
+        uc =ifft2(uk)
+        cdef complex [:,:] u3 = (fft2(uc*uc*uc))
+
+        for i in prange(Ng, nogil=True):
+            for j in range(Ng):
+                k2 = ksq[i,j]
+                du[i,j] = -k2*dt*( (a+kp*k2)*u[i,j] + b*u3[i,j] ) + Df*(kx[i,j]*rnx[i,j]+ky[i,j]*rny[i,j])
+        return 

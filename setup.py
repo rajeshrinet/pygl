@@ -1,9 +1,23 @@
 import numpy
 import os, sys, re
+from setuptools import setup, Extension
 from Cython.Build import cythonize
 import Cython.Compiler.Options
 Cython.Compiler.Options.annotate=True
-from setuptools import setup, Extension
+
+
+if 'darwin'==(sys.platform).lower():
+    extension1 = Extension('pygl/*', ['pygl/*.pyx'],
+        include_dirs=[numpy.get_include()],
+        extra_compile_args=['-mmacosx-version-min=10.9'],
+        extra_link_args=['-mmacosx-version-min=10.9'],
+    )
+else:
+    extension1 = Extension('pygl/*', ['pygl/*.pyx'],
+        include_dirs=[numpy.get_include()],
+    )
+
+
 
 
 with open("README.md", "r") as fh:
@@ -25,22 +39,33 @@ setup(
     name='pygl',
     version=version,
     url='https://github.com/rajeshrinet/pygl',
-    author='The PyGL team',
+	project_urls={
+            "Documentation": "https://pygl.readthedocs.io",
+            "Source": "https://github.com/rajeshrinet/pygl",
+			},
+    author='The pygl team',
+    author_email = 'pygl@googlegroups.com',
     license='MIT',
-    description='PyGL is a numerical library for statistical field theory in Python',
-    long_description='PyGL is a numerical library for statistical field theory in Python',
-    #long_description=long_description,
-    #long_description_content_type='text/markdown',
-    ext_modules=cythonize([ Extension("pygl/*", ["pygl/*.pyx"],
-        include_dirs=[numpy.get_include()],
-        )],
-        compiler_directives={"language_level": sys.version_info[0]},
+    description='pygl is a numerical library for inference, forecasts,\
+                and optimal control of epidemiological models in Python',
+    long_description=long_description,
+    long_description_content_type='text/markdown',
+    platforms='tested on Linux, macOS, and windows',
+    ext_modules=cythonize([extension1],
+        compiler_directives={'language_level': 3},
         ),
     libraries=[],
-    packages=['pygl'],
     install_requires=['cython','numpy','scipy'],
-    extras_require={
-            'plotting': ['matplotlib'],
-            'notebook': ['jupyter', 'nbconvert']},
-    package_data={'pygl': ['*.pxd']},
+    packages=['pygl'],
+    include_package_data=True,
+    setup_requires=['wheel'],
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.7',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Mathematics',
+        'Intended Audience :: Science/Research',
+        'Intended Audience :: Education',
+        ],
 )
