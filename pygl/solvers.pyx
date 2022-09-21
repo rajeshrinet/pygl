@@ -1,7 +1,7 @@
 import  numpy as np
 cimport numpy as np
 cimport cython
-from libc.math cimport sqrt, pow, log, sin, cos
+from libc.math cimport sqrt, pow, log, sin, cos, exp
 from cython.parallel import prange
 
 cdef double PI = 3.14159265359
@@ -9,6 +9,36 @@ fft2  = np.fft.fft2
 ifft2 = np.fft.ifft2
 randn = np.random.randn
 
+cdef extern from "stdlib.h" nogil:
+    double drand48()
+    void srand48(long int seedval)
+
+cdef extern from "time.h":
+    long int time(int)
+srand48(time(0))
+
+cdef double gaussianRn() nogil:
+    cdef int iset = 0;
+    cdef double fac, rsq, v1, v2;
+  
+    if (iset == 0): 
+        v1 = 2.0*drand48()-1.0;
+        v2 = 2.0*drand48()-1.0;
+        rsq = v1*v1 + v2*v2;
+        while (rsq >= 1.0 or rsq == 0.0):
+            v1 = 2.0*drand48()-1.0;
+            v2 = 2.0*drand48()-1.0;
+            rsq = v1*v1 + v2*v2;
+        fac = sqrt(-2.0*log(rsq)/rsq);
+        iset = 1
+        return v2*fac
+    else:
+        iset = 0
+        return v1*fac
+
+
+def getRN():
+    return (gaussianRn())
 
 DTYPE   = np.float
 ctypedef np.float_t DTYPE_t
@@ -218,8 +248,8 @@ cdef class ModelB():
     Simualting model B
     """
     cdef readonly int Nt, Ny, Nz, Ng, Nf, Tf
-    cdef readonly np.ndarray kx, ky, ksq, XX, du
-    cdef readonly double dt, h, a, b, kp, Df
+    cdef readonly np.ndarray kx, ky, ksq, XX, du, alp
+    cdef readonly double dt, h, a, b, kp, Df, t
 
     def __init__(self, param):
 
@@ -229,6 +259,7 @@ cdef class ModelB():
         self.h  = param['h']
         self.a  = param['a']
         self.b  = param['b']
+        self.t  = 0.0
         self.kp = param['kp']
 
         self.Ng = param['Ng']
@@ -242,7 +273,8 @@ cdef class ModelB():
         kx  = np.fft.fftfreq(Ng)*(2*np.pi/self.h)
         ky  = np.fft.fftfreq(Ng)*(2*np.pi/self.h)
         self.kx, self.ky = np.meshgrid(kx, ky) 
-        self.ksq = self.kx*self.kx + self.ky*self.ky
+        self.ksq = self.kx*self.kx + self.ky*self.ky 
+        self.alp = np.exp(-self.dt*self.ksq*(self.a + self.kp*self.ksq))
     
     
     cpdef integrate(self, u):
@@ -257,9 +289,24 @@ cdef class ModelB():
             if i%(Tf)==0:  
                 self.XX[ii,:]=(np.real(ifft2(u))).flatten()
                 ii += 1   
-                if ii%100==0:
+                if ii%50==0:
                     print (int(i*simC), '% done')
-  
+ 
+     
+    cpdef integrateFPS(self, u):
+        '''  simulates the equation and plots it at different instants '''
+        cdef int ii=0, i ,Nt=self.Nt, Tf=self.Tf, Ng=self.Ng
+        cdef double  simC=(100.0/self.Nt), dt=self.dt, t
+        
+        self.du = u
+        for i in range(Nt):          
+            self.rhsFPS()
+
+            if i%(Tf)==0:  
+                self.XX[ii,:]=(np.real(ifft2(self.du))).flatten()
+                ii += 1   
+                if ii%50==0:
+                    print (int(i*simC), '% done')
                 
     cpdef rhs(self, uk):
         '''
@@ -285,4 +332,34 @@ cdef class ModelB():
             for j in range(Ng):
                 k2 = ksq[i,j]
                 du[i,j] = -k2*dt*( (a+kp*k2)*u[i,j] + b*u3[i,j] ) + Df*(kx[i,j]*rnx[i,j]+ky[i,j]*rny[i,j])
+        return 
+    
+    
+    cpdef rhsFPS(self):
+        '''
+        returns the right hand side of \dot{phi} in model B
+        \dot{phi} = Δ(a*u + b*u*u*u + kΔu + λ(∇u)^2) 
+        '''
+        cdef int i, j, Ng=self.Ng 
+        cdef double a=self.a, kp=self.kp
+        cdef double kx, ky, k2, dtb=self.b*self.dt
+        cdef complex Df = 1j*self.Df
+
+        cdef double [:, :] kxv = self.kx
+        cdef double [:, :] kyv = self.ky
+        cdef double [:, :] rnx = randn(Ng, Ng)
+        cdef double [:, :] rny = randn(Ng, Ng) 
+        cdef double [:, :] alp = self.alp
+        cdef complex [:, :] du = self.du 
+
+        
+        uc =ifft2(self.du) 
+        cdef complex [:,:] u3 = (fft2(uc*uc*uc))
+
+        for i in prange(Ng, nogil=True):
+            for j in range(Ng):
+                kx = kxv[i,j]
+                ky = kyv[i,j]
+                k2 = kx*kx + ky*ky
+                du[i,j] = (du[i,j] - k2*dtb*u3[i,j] + Df*(kx*rnx[i,j]+ky*rny[i,j]))*(alp[i,j])
         return 
