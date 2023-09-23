@@ -40,7 +40,7 @@ cdef double gaussianRn() nogil:
 def getRN():
     return (gaussianRn())
 
-DTYPE   = np.float
+DTYPE   = np.float64
 ctypedef np.float_t DTYPE_t
 @cython.wraparound(False)
 @cython.boundscheck(False)

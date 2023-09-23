@@ -14,7 +14,7 @@ cdef extern from "time.h":
 # srand48(time(0))
 srand48(100)
 
-DTYPE   = np.float
+DTYPE   = np.float64
 DTYP1   = np.int32
 ctypedef np.float_t DTYPE_t 
 
@@ -126,7 +126,7 @@ def azimuthalAverage2(u):
     nr = rind[1:] - rind[:-1]        # number of radius bin
 
     # Cumulative sum to figure out sums for each radius bin
-    csim = np.cumsum(i_sorted, dtype=float)
+    csim = np.cumsum(i_sorted, dtype=np.float64)
     tbin = csim[rind[1:]] - csim[rind[:-1]]
 
     ur = tbin / nr

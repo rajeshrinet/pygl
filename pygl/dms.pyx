@@ -4,7 +4,7 @@ cimport cython
 from libc.math cimport sqrt, pow
 cdef double PI = 3.14159265359
 from scipy.sparse import spdiags
-DTYPE   = np.float
+DTYPE   = np.float64
 ctypedef np.float_t DTYPE_t
 
 
@@ -64,6 +64,8 @@ cdef class FD:
         *weights of the m-th order derivative using central Difference 
         *this can be read from the table if the code needs to be made fast
         *first generate the table using the code!
+        Read more: Bengt Fornberg SIAM Review, Vol. 40, No. 3 (Sep., 1998)
+        Calculation of Weights in Finite Difference Formulas
         '''
         cdef int i, j, k, ii, jj 
         wts=np.zeros((m+1, self.s), dtype=DTYPE)
