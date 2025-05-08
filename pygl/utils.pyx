@@ -60,7 +60,77 @@ cpdef structureFactor(u, dim):
     
 
 
+def avgStructFunc(u, bins, dim):
+    if dim==2:
+        Nx, Ny = np.shape(u)
+        # xx, yy = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2))
+        # rr = np.sqrt(xx*xx + yy*yy)
+        kx     = (2*np.pi)*np.fft.fftfreq(Nx)
+        kx, ky = np.meshgrid(kx,kx);
+        k2  = kx*kx + ky*ky; k4=k2*k2 ; 
+        ksq= np.fft.fftshift((k2))
+        rr = np.sqrt(ksq)
+    
+    if dim==3:
+        Nx, Ny, Nz = np.shape(u)
+        xx, yy, zz = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2),np.arange(-Nz/2, Nz/2))
+        rr = np.sqrt(xx*xx + yy*yy + zz*zz)
 
+
+    rr = rr.flatten()        
+    rs = np.sort(rr)
+    ri = np.argsort(rr)
+
+    u  = u.flatten();   ua = np.zeros(bins)
+    u  = u[ri]
+
+    ht, bns = np.histogram(rs, bins)
+    bn = 0.5*(bns[:-1] + bns[1:])
+    hm = np.cumsum(ht)
+
+    ua[0] = np.mean( u[0:ht[0]] )
+    ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
+    for i in range(1, bins-1):
+        ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
+    return ua, bn
+
+
+
+def avgCorrFunc(u, bins, dim):
+    if dim==2:
+        Nx, Ny = np.shape(u)
+        # xx, yy = np.meshgrid(np.arange(-Nx/2, Nx/2),np.arange(-Ny/2, Ny/2))
+        # rr = np.sqrt(xx*xx + yy*yy)
+        kx     = np.arange(Nx)
+        kx, ky = np.meshgrid(kx,kx);
+        k2  = kx*kx + ky*ky; k4=k2*k2 ; 
+        ksq= np.fft.fftshift((k2))
+        rr = np.sqrt(ksq)
+    
+    if dim==3:
+        Nx, Ny, Nz = np.shape(u)
+        xx, yy, zz = np.meshgrid(np.arange(Nx), np.arange(Nx), np.arange(Nx))
+        rr = np.sqrt(xx*xx + yy*yy + zz*zz)
+
+
+    rr = rr.flatten()        
+    rs = np.sort(rr)
+    ri = np.argsort(rr)
+
+    u  = u.flatten();   ua = np.zeros(bins)
+    u  = u[ri]
+
+    ht, bns = np.histogram(rs, bins)
+    bn = 0.5*(bns[:-1] + bns[1:])
+    hm = np.cumsum(ht)
+
+    ua[0] = np.mean( u[0:ht[0]] )
+    ua[bins-1] = np.mean( u[bins-1-ht[bins-1]:] )
+    for i in range(1, bins-1):
+        ua[i] = np.mean( u[hm[i]+1:hm[i+1]])
+    return ua, bn
+
+    
 cpdef azimuthalAverage(u, r, bins):
     """
     Obtains radial distribution of field 
@@ -137,6 +207,8 @@ def azimuthalAverage2(u):
 def radial_profile(data, r, bins_N=100):
     ring_brightness, radius = np.histogram(r, weights=data, bins=bins_N)
     return radius[1:], ring_brightness    
+
+
 def radial_profile2(u, r):
     tbin = np.bincount(r.ravel(), u.ravel())
     nr = np.bincount(r.ravel())
