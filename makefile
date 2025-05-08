@@ -28,7 +28,7 @@ test:
 nbtest:
 	@echo testing example notebooks...
 	@echo test $(path)
-	cd pygl/tests/ && python testNotebooks.py --path $(path) --recursive $(recursive)
+	cd pygl/tests/ && python testNotebooks.py
 
 
 pypitest:

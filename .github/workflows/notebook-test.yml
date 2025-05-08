@@ -23,4 +23,4 @@ jobs:
       - name: testing-notebooks
         shell: bash -l {0}
         run: |
-          make nbtest 
+          cd tests && python testNotebooks.py 

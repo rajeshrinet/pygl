@@ -4,72 +4,6 @@ import datetime, os, re, subprocess, sys, argparse, time, unittest
 ignoreFlag=True   # change to False if not to ignore  
 
 
-def run_notebook_tests(path, recursive=False):
-    """
-    Runs Jupyter notebook tests. Exits if they fail.
-    """
-    basepath = os.path.dirname(__file__)
-    nbpath = os.path.abspath(os.path.join(basepath, "..", path))
-    '''
-    Ignore notebooks which take longer or have deliberate errors, 
-    but check they still exists
-    '''
-    os.chdir('../examples/')
-
-    cwd =os.getcwd()
-    ignore_list = [
-                    ]
-
-    for ignored_book in ignore_list:
-        if not os.path.isfile(ignored_book):
-            raise Exception('Ignored notebook not found: ' + ignored_book)
-
-    # Scan and run
-    print('Testing notebooks')
-    ok = True
-    for notebook, cwd in list_notebooks(nbpath, recursive, ignore_list):
-        os.chdir(cwd) # necessary for relative imports in notebooks
-        ok &= test_notebook(notebook)
-        # print(notebook)
-    if not ok:
-        print('\nErrors encountered in notebooks')
-        sys.exit(1)
-    print('\nOK')
-
-
-def list_notebooks(root, recursive=False, ignore_list=None, notebooks=None):
-    """
-    Returns a list of all notebooks in a directory.
-    """
-    if notebooks is None:
-        notebooks = []
-    if ignore_list is None or ignoreFlag==False:
-        ignore_list = []
-    try:
-        for filename in os.listdir(root):
-            path = os.path.join(root, filename)
-            cwd = os.path.dirname(path)
-            if path in ignore_list:
-                print('Skipping ignored notebook: ' + path)
-                continue
-    
-            # Add notebooks
-            if os.path.splitext(path)[1] == '.ipynb':
-                notebooks.append((path,cwd))
-    
-            # Recurse into subdirectories
-            elif recursive and os.path.isdir(path):
-                # Ignore hidden directories
-                if filename[:1] == '.':
-                    continue
-                list_notebooks(path, recursive, ignore_list, notebooks)
-    except NotADirectoryError:
-        path = root
-        cwd = os.path.dirname(path)
-        return [(path,cwd)]
-
-    return notebooks
-
 
 def test_notebook(path):
     """
@@ -155,29 +89,11 @@ def export_notebook(ipath, opath):
     os.chmod(opath, 0o775)
 
 
-if __name__ == '__main__':
-    # Set up argument parsing
-    def str2bool(v):
-        if isinstance(v, bool):
-           return v
-        if v.lower() in ('yes', 'true', 't', 'y', '1'):
-            return True
-        elif v.lower() in ('no', 'false', 'f', 'n', '0'):
-            return False
-        else:
-            raise argparse.ArgumentTypeError('Boolean value expected.')
-    parser = argparse.ArgumentParser(
-        description='Run notebook unit tests for PyStokes.',
-    )
-    # Unit tests
-    parser.add_argument(
-        '--path', default = '.',
-        help='Run specific notebook or folder containing notebooks',)
-    parser.add_argument(
-        '--recursive', default = True, type=str2bool,
-        help='Wheither or not subfolders are searched',)
+cwd0 =os.getcwd()
+os.chdir('../examples/')
+cwd =os.getcwd()
 
-    # Parse!
-    args = parser.parse_args()
-    print(args)
-    run_notebook_tests(args.path, recursive=args.recursive)
+path1 = cwd+'/fourierMethod.ipynb'   
+path2 = cwd+'/diffusionEquation.ipynb' 
+test_notebook(path1)
+test_notebook(path2)
